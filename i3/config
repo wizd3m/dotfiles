@@ -1,0 +1,173 @@
+# keys
+set $mod Mod4
+floating_modifier $mod
+
+# fonts
+font pango:iosevka 12px
+font pango:FontAwesome 10px
+
+
+# lock screen
+bindsym $mod+l exec i3lock --insidevercolor=333333ff --insidewrongcolor=333333bf --insidecolor=333333bf --ringvercolor=333333ff --ringwrongcolor=333333ff --ringcolor=333333ff --textcolor=ffffffff --separatorcolor=333333ff --keyhlcolor=D84315ff --bshlcolor=ccccccff -r -c 333333
+
+
+# colours
+client.focused              #0F0F0F #C84630 #F5F5FF
+client.focused_inactive     #0F0F0F #343434 #E5E5E5
+client.unfocused            #0F0F0F #343434 #E5E5E5
+client.urgent               #0F0F0F #343434 #E5E5E5
+
+
+
+
+# autoexec
+exec --no-startup-id xrandr --dpi 180
+exec --no-startup-id redshift
+exec --no-startup-id compton
+exec --no-startup-id xrdb ~/.Xresources
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id .config/polybar/launch.sh
+#exec --no-startup-id xrandr --output DVI-D-0 --rotate left
+#exec --no-startup-id setxkbmap gb
+#exec --no-startup-id xrandr --output DP-4 --left-of DVI-I-1
+
+
+# gaps
+gaps inner 2
+gaps outer 2
+for_window [class="^.*"] border pixel 1
+smart_gaps on
+smart_borders on
+
+# shortcuts
+bindsym $mod+Return exec termite
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+space exec --no-startup-id rofi -show window
+
+
+# change focus
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+L focus up
+#bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orienttion
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
+
+
+
+# focus the parent container
+# bindsym $mod+a focus parent
+
+
+
+
+
+# focus the child container
+#bindsym $mod+d focus child
+
+set $workspace1 "1"
+set $workspace2 "2"
+set $workspace3 "3"
+set $workspace4 "4"
+set $workspace5 "5"
+set $workspace6 "6"
+set $workspace7 "7"
+set $workspace8 "8"
+set $workspace9 "9"
+set $workspace10 "10"
+
+
+
+
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+
+
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
